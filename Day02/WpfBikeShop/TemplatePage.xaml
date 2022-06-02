@@ -7,33 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TemplatePage">
-    <Page.Resources>
-        <Style x:Key="niceButton" TargetType="Button">
-            <Setter Property="Width" Value="150"/>
-            <Setter Property="Height" Value="50"/>
-            <Setter Property="Background">
-                <Setter.Value>
-                    <LinearGradientBrush>
-                        <GradientStop Color="Green"/>
-                        <GradientStop Color="Coral" Offset="1"/>
-                    </LinearGradientBrush>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Grid>
-                            <Rectangle Fill="{TemplateBinding Background}"
-                                 Stroke="Blue" StrokeThickness="2"
-                                   RadiusX="10" RadiusY="10"/>
-
-                            <ContentPresenter HorizontalAlignment="center" VerticalAlignment="center"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Page.Resources>
+    
 
     <StackPanel>
         <Button Content="Press Me" Click="Button_Click"
