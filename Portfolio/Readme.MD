@@ -1,5 +1,7 @@
 # WPF 포트폴리오 
 
+<br/>
+
 ## Naver 영화검색
 - WPF (.NET Framework 4.7.2 / C#)
   - mahApps.Metro MetroUI/MordernUI
@@ -8,6 +10,8 @@
   - Google.Apis.Youtube.v3
   - CefSharp WebBrowser component
   - EntityFramework DB
+
+<br/>
 
   ![NaverMovieFinder](https://raw.githubusercontent.com/Simsim112/StudyWpf/main/Capture/Ring%20of%20Lord.JPG)
   실행화면
