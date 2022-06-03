@@ -1,5 +1,4 @@
 # WPF 포트폴리오 
-
 <br/>
 
 ## Naver 영화검색
@@ -15,12 +14,10 @@
 
   ![NaverMovieFinder](https://raw.githubusercontent.com/Simsim112/StudyWpf/main/Capture/Ring%20of%20Lord.JPG)
   실행화면
-  
 <br/>
   
   ![YoutubePlay](https://raw.githubusercontent.com/Simsim112/StudyWpf/main/Capture/YoutubeTrailer.PNG)
   검색영화 예고편보기
-
 <br/>
 
 ## Naver 뉴스검색
