@@ -2,9 +2,14 @@
 
 ## Naver 영화검색
 - WPF (.NET Framework 4.7.2 / C#)
-  - mahApps.Metro Design
+  - mahApps.Metro MetroUI/MordernUI
+  - Newtonsoft.Json
   - Naver OpenAPI
-  - Youtube OpenAPI
-  - Json datahandling
-  
-  ![NaverMovieFinder](https://github.com/Simsim112/StudyWpf/blob/main/Capture/Ring%20of%20Lord.JPG)
+  - Google.Apis.Youtube.v3
+  - CefSharp WebBrowser component
+  - EntityFramework DB
+
+  ![NaverMovieFinder](https://raw.githubusercontent.com/Simsim112/StudyWpf/main/Capture/Ring%20of%20Lord.JPG)
+  실행화면
+  ![YoutubePlay]()
+  검색영화 예고편보기
