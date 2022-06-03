@@ -17,4 +17,4 @@ C# WPF 학습지포지토리
 ## Day 3일차
 - 디자인(Design)
 - 리소스(Resource)
-- 네이버 영화 앱 만들기(Making Naver Movie App)
+- 네이버 영화 앱 만들기([클릭](https://github.com/Simsim112/StudyWpf/tree/main/Portfolio))(Making Naver Movie App)
