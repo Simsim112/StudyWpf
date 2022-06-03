@@ -15,5 +15,6 @@
 
   ![NaverMovieFinder](https://raw.githubusercontent.com/Simsim112/StudyWpf/main/Capture/Ring%20of%20Lord.JPG)
   실행화면
+  
   ![YoutubePlay](https://raw.githubusercontent.com/Simsim112/StudyWpf/main/Capture/YoutubeTrailer.PNG)
   검색영화 예고편보기
