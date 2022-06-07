@@ -25,4 +25,14 @@
   - mahApps.Metro MetroUI/MordernUI
   - Newtonsoft.Json
   - Naver OpenAPI
+
+<br/>
+
+![YoutubePlay](https://raw.githubusercontent.com/Simsim112/StudyWpf/main/Capture/NaverNewsSearch.PNG)<br/>
+실행화면(클릭하면 창으로 넘어감)
+
+![YoutubePlay](https://raw.githubusercontent.com/Simsim112/StudyWpf/main/Capture/NaverNewsSearchResult.PNG)
+네이버뉴스 보기
+
+
  
