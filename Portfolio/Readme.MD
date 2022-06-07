@@ -13,10 +13,12 @@
 <br/>
 
   ![NaverMovieFinder](https://raw.githubusercontent.com/Simsim112/StudyWpf/main/Capture/Ring%20of%20Lord.JPG)
+  
   실행화면
 <br/>
   
   ![YoutubePlay](https://raw.githubusercontent.com/Simsim112/StudyWpf/main/Capture/YoutubeTrailer.PNG)
+  
   검색영화 예고편보기
 <br/>
 
@@ -25,4 +27,11 @@
   - mahApps.Metro MetroUI/MordernUI
   - Newtonsoft.Json
   - Naver OpenAPI
+
+</br>
+
+![YoutubePlay](https://raw.githubusercontent.com/Simsim112/StudyWpf/main/Capture/NaverNewsSearch.PNG)
+
+실행화면
+
  
