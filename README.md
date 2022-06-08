@@ -27,3 +27,5 @@ C# WPF 학습지포지토리
 - MVVM 패턴 학습(디자인과 코드 완전분리)
 
 ## Day 6일차
+- Caliburn.Micro MVVM 학습
+- SmartHOme 앱 만들기
