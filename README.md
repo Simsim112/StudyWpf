@@ -28,4 +28,4 @@ C# WPF 학습지포지토리
 
 ## Day 6일차
 - Caliburn.Micro MVVM 학습
-- SmartHme 앱 만들기
+- SmartHome 앱 만들기
