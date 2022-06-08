@@ -20,12 +20,13 @@ C# WPF 학습지포지토리
 - 네이버 영화 앱 만들기([클릭](https://github.com/Simsim112/StudyWpf/tree/main/Portfolio))(Making Naver Movie App)
 
 ## Day 4일차
-  - 네이버 영화 앱 마무리([클릭](https://github.com/Simsim112/StudyWpf/tree/main/Portfolio))(Making Naver Movie App)
-  - 네이버 뉴스검색 앱
+- 네이버 영화 앱 마무리([클릭](https://github.com/Simsim112/StudyWpf/tree/main/Portfolio))(Making Naver Movie App)
+- 네이버 뉴스검색 앱
 
 ## Day 5일차
 - MVVM 패턴 학습(디자인과 코드 완전분리)
 
 ## Day 6일차
 - Caliburn.Micro MVVM 학습
+- Bogus(FaekData, DummyData) 패키지 학습
 - SmartHome 앱 만들기
