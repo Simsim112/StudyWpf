@@ -34,5 +34,21 @@
 ![YoutubePlay](https://raw.githubusercontent.com/Simsim112/StudyWpf/main/Capture/NaverNewsSearchResult.PNG)
 네이버뉴스 보기
 
+<br/>
+
+## SmartHome 모니터링앱
+- WPF (.Net Framework 4.7.2 / C#)
+  - MahApps.Metro
+  - Caliburn.Micro
+  - LiveCharts
+  - M2Mqtt
+  - Newtonsoft.Json
+  - SQLServer DB
+ 
+<br/>
+
+![SmartHomeMonitoring](https://raw.githubusercontent.com/Simsim112/StudyWpf/main/Capture/MQTT_Data.PNG)
+DB모니터링 화면
+
 
  
