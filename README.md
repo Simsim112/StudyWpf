@@ -21,7 +21,7 @@ C# WPF 학습지포지토리
 
 ## Day 4
 - 네이버 영화 앱 마무리([클릭](https://github.com/Simsim112/StudyWpf/tree/main/Portfolio))(Making Naver Movie App)
-- 네이버 뉴스검색 앱
+- 네이버 뉴스검색 앱 ([클릭](https://github.com/Simsim112/StudyWpf/blob/main/Portfolio/Readme.MD#naver-%EB%89%B4%EC%8A%A4%EA%B2%80%EC%83%89))
 
 ## Day 5
 - MVVM 패턴 학습(디자인과 코드 완전분리)
