@@ -28,12 +28,12 @@ namespace DummyDataApp
         {
             MqttBrokerUrl = "127.0.0.1";//"210.119.12.57";//"localhost";//
 
-            var Rooms = new[] { "DINNING", "LIVING", "BATH", "BED" }; //부엌 거실 욕실 침실
+            var Rooms = new[] { "DINING", "LIVING", "BATH", "BED" }; //부엌 거실 욕실 침실
 
             sensorData = new Faker<SensorInfo>()
                 .RuleFor(r => r.DevId, f => f.PickRandom(Rooms))
-                .RuleFor(r => r.CurTime, f => f.Date.Past(0))
-                .RuleFor(r => r.Temp, f => f.Random.Float(19.0f, 30.9f))
+                .RuleFor(r => r.CurrTime, f => f.Date.Past(0))
+                .RuleFor(r => r.Temp, f => f.Random.Float(0.0f, 50.0f))
                 .RuleFor(r => r.Humid, f => f.Random.Float(40.0f, 63.9f));
         }
 
@@ -58,8 +58,44 @@ namespace DummyDataApp
         {
             MqttThread = new Thread(() => LoopPublish());
             MqttThread.Start();
+
+            /*Thread thread2 = new Thread(() => LoopPublish2());
+            thread2.Start();
+
+            Thread thread3 = new Thread(() => LoopPublish3());
+            thread3.Start();*/
         }
 
+        private static void LoopPublish3()
+        {
+            while (true)
+            {
+                SensorInfo tempValue = sensorData.Generate();
+                tempValue.DevId = "Test"; //newdata topic DEIVD 변경 
+                CurrValue = JsonConvert.SerializeObject(tempValue, Formatting.Indented);
+                Client.Publish("home/device/testdata/", Encoding.Default.GetBytes(CurrValue));
+                Console.WriteLine($"Published : { CurrValue}");
+                Thread.Sleep(1800);
+
+            }
+        }
+
+        // LoopPublish하고 별개 동작하는 태스크
+        private static void LoopPublish2()
+        {
+            while (true)
+            {
+                SensorInfo tempValue = sensorData.Generate();
+                tempValue.DevId = Guid.NewGuid().ToString(); //newdata topic DEIVD 변경 
+                CurrValue = JsonConvert.SerializeObject(tempValue, Formatting.Indented);
+                Client.Publish("home/device/newdata/", Encoding.Default.GetBytes(CurrValue));
+                Console.WriteLine($"Published : { CurrValue}");
+                Thread.Sleep(1500);
+
+            }
+        }
+
+        //Main 메서드 실해오디는 부분하는 별개로 동작하는 태스크
         private static void LoopPublish()
         {
             while(true)

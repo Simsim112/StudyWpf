@@ -1,6 +1,9 @@
 ﻿using Caliburn.Micro;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -69,7 +72,7 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
         public DataBaseViewModel()
         {
             BrokerUrl = Commons.BROCKERHOST = "127.0.0.1"; //MQTT Broker IP 설정
-            Topic = Commons.PUB_TOPIC = "home/device/fakedata/";
+            Topic = Commons.PUB_TOPIC = "home/device/#";
             ConnString = Commons.CONNSTRING = "Data Source=PC01;Initial Catalog=OpenApiLab;Integrated Security=True";
 
             if (Commons.IS_CONNECT)
@@ -133,7 +136,58 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
         private void MQTT_CLIENT_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
             var message = Encoding.UTF8.GetString(e.Message);
-            UpdateText(message);
+            UpdateText(message);    //센서데이터 출력
+            SetDataBase(message, e.Topic);   //DB에 저장 
+        }
+
+        private void SetDataBase(string message, string topic)
+        {
+            var currDatas = JsonConvert.DeserializeObject<Dictionary<string, string>>(message);
+
+            Debug.WriteLine(currDatas);
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                conn.Open();
+
+                //Verbatim string 
+                string strInQuery = @"INSERT INTO dbo.TblSmartHome
+                                           (DevId
+                                           , CurrTime
+                                           , Temp
+                                           , Humid)
+                                     VALUES
+                                           (@DevId
+                                           , @CurrTime
+                                           , @Temp
+                                           , @Humid)";
+
+                try
+                {
+                    SqlCommand cmd = new SqlCommand(strInQuery, conn);
+                    SqlParameter parmDevId = new SqlParameter("@DevId", currDatas["DevId"]);
+                    cmd.Parameters.Add(parmDevId);
+
+                    SqlParameter parmCurrTime = new SqlParameter("@CurrTime", DateTime.Parse(currDatas["CurrTime"]));
+                    cmd.Parameters.Add(parmCurrTime);
+
+                    SqlParameter parmTemp = new SqlParameter("@Temp", currDatas["Temp"]);
+                    cmd.Parameters.Add(parmTemp);
+
+                    SqlParameter parmHumid = new SqlParameter("@Humid", currDatas["Humid"]);
+                    cmd.Parameters.Add(parmHumid);
+
+                    // 1이면 데이터 넘어감 0이면 안넘어감
+                    if (cmd.ExecuteNonQuery() == 1)
+                        UpdateText(">>> DB Inserted."); //성공
+                    else
+                        UpdateText(">>> DB Failed!!!!!!!"); //실패 
+                }
+                catch (Exception ex)
+                {
+                    UpdateText($">>> DB ERROR! {ex.Message}");  //예외
+                }
+            } //conn.Close() 불필요
         }
     }
 }

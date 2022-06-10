@@ -37,7 +37,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
-            <iconPacks:PackIconVaadinIcons Kind="Database" VerticalAlignment="Center" Margin="5" RenderTransformOrigin="0.5,0.5">
+            <iconPacks:PackIconVaadinIcons Kind="Database" VerticalAlignment="Center" 
+                                           Margin="10" RenderTransformOrigin="0.5,0.5">
                 <iconPacks:PackIconVaadinIcons.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="1.5" ScaleY="1.8"/>
