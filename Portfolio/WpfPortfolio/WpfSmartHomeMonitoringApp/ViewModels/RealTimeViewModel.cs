@@ -1,10 +1,9 @@
 ﻿using Caliburn.Micro;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using uPLibrary.Networking.M2Mqtt;
+using uPLibrary.Networking.M2Mqtt.Messages;
 using WpfSmartHomeMonitoringApp.Helpers;
 
 namespace WpfSmartHomeMonitoringApp.ViewModels
@@ -16,10 +15,10 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
         private string bedTempVal;
         private string bathTempVal;
 
-        private string livingHumidVal;
-        private string diningHumidVal;
-        private string bedHumidVal;
-        private string bathHumidVal;
+        private double livingHumidVal;
+        private double diningHumidVal;
+        private double bedHumidVal;
+        private double bathHumidVal;
 
         public string LivingTempVal
         {
@@ -27,7 +26,7 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
             set
             {
                 livingTempVal = value;
-                NotifyOfPropertyChange(() => livingTempVal);
+                NotifyOfPropertyChange(() => LivingTempVal);
             }
         }
         public string DiningTempVal
@@ -36,7 +35,7 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
             set
             {
                 diningTempVal = value;
-                NotifyOfPropertyChange(() => diningTempVal);
+                NotifyOfPropertyChange(() => DiningTempVal);
             }
         }
         public string BedTempVal
@@ -45,7 +44,7 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
             set
             {
                 bedTempVal = value;
-                NotifyOfPropertyChange(() => bedTempVal);
+                NotifyOfPropertyChange(() => BedTempVal);
             }
         }
         public string BathTempVal
@@ -54,11 +53,11 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
             set
             {
                 bathTempVal = value;
-                NotifyOfPropertyChange(() => bathTempVal);
+                NotifyOfPropertyChange(() => BathTempVal);
             }
         }
 
-        public string LivingHumidVal
+        public double LivingHumidVal
         {
             get => livingHumidVal; 
             set
@@ -67,7 +66,7 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
                 NotifyOfPropertyChange(() => LivingHumidVal);
             }
         }
-        public string DiningHumidVal
+        public double DiningHumidVal
         {
             get => diningHumidVal; 
             set
@@ -76,7 +75,7 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
                 NotifyOfPropertyChange(() => DiningHumidVal);
             }
         }
-        public string BedHumidVal
+        public double BedHumidVal
         {
             get => bedHumidVal; 
             set
@@ -85,7 +84,7 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
                 NotifyOfPropertyChange(() => BedHumidVal);
             }
         }
-        public string BathHumidVal
+        public double BathHumidVal
         {
             get => bathHumidVal; 
             set
@@ -97,13 +96,23 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
 
         public RealTimeViewModel()
         {
+            Commons.BROCKERHOST = "127.0.0.1";
+            Commons.PUB_TOPIC = "home/device/#";
             LivingTempVal = DiningTempVal = BedTempVal = BathTempVal = "0";
-            
-            if(Commons.MQTT_CLIENT != null && Commons.MQTT_CLIENT.IsConnected)
+            LivingHumidVal = DiningHumidVal = BedHumidVal = BathHumidVal = 0;
+
+
+            if (Commons.MQTT_CLIENT != null && Commons.MQTT_CLIENT.IsConnected)
                 Commons.MQTT_CLIENT.MqttMsgPublishReceived += MQTT_CLIENT_MqttMsgPublishReceived;
             else//접속이 안되어 있으면 
             {
                 //MQTT Broker에 접속하는 내용
+                Commons.MQTT_CLIENT = new MqttClient(Commons.BROCKERHOST);
+                Commons.MQTT_CLIENT.Connect("MONITOR");
+                Commons.MQTT_CLIENT.Subscribe(new string[] { Commons.PUB_TOPIC },
+                           new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
+                Commons.IS_CONNECT = true;
+                Commons.MQTT_CLIENT.MqttMsgPublishReceived += MQTT_CLIENT_MqttMsgPublishReceived;
             }
         }
 
@@ -116,15 +125,19 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
             {
                 case "LIVING":
                     LivingTempVal = double.Parse(currDatas["Temp"]).ToString("0.#");
+                    LivingHumidVal = double.Parse(currDatas["Humid"]);
                     break;
                 case "DINING":
                     DiningTempVal = double.Parse(currDatas["Temp"]).ToString("0.#");
+                    DiningHumidVal = double.Parse(currDatas["Humid"]);
                     break;
                 case "BED":
                     BedTempVal = double.Parse(currDatas["Temp"]).ToString("0.#");
+                    BedHumidVal = double.Parse(currDatas["Humid"]);
                     break;
                 case "BATH":
                     BathTempVal = double.Parse(currDatas["Temp"]).ToString("0.#");
+                    BathHumidVal = double.Parse(currDatas["Humid"]);
                     break;
                 default:
                     break;

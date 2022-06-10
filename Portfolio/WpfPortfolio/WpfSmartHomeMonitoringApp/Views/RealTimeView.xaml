@@ -26,7 +26,7 @@
                     </TransformGroup>
                 </iconPacks:PackIconSimpleIcons.RenderTransform>
             </iconPacks:PackIconSimpleIcons>
-            <Label Content="Realtime Monitoring" VerticalAlignment="Center"
+            <Label Content="Realtime IoT Data Monitoring" VerticalAlignment="Center"
                Style="{StaticResource MahApps.Styles.Label}"
                FontSize="30" FontWeight="Bold" Foreground="DodgerBlue"/>
         </StackPanel>
