@@ -31,7 +31,7 @@ C# WPF 학습지포지토리
 - Bogus(FaekData, DummyData) 패키지 학습
 - SmartHome 시스템 만들기
 
-## Day 7일차
+## Day 7 ~ 8
 - SmartHome 시스템 만들기([클릭](https://github.com/Simsim112/StudyWpf/blob/main/Portfolio/Readme.MD#smarthome-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81%EC%95%B1))
   - MQTT Publish 프로그램
   - MQTT Broker 설정
