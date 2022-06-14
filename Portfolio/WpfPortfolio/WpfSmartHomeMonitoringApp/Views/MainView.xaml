@@ -22,18 +22,18 @@
                         <MenuItem.Icon>
                             <iconPacks:MaterialDesign Kind="AttachFile"/>
                         </MenuItem.Icon>
-                        <MenuItem Header="Start">
+                        <MenuItem  x:Name="PopInfoDialog" Header="Start">
                             <MenuItem.Icon>
                                 <iconPacks:MaterialDesign Kind="PlayCircleFilled"/>
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="Stop">
+                        <MenuItem x:Name="Menu_Stop" Header="Stop">
                             <MenuItem.Icon>
                                 <iconPacks:MaterialDesign Kind="PauseCircleFilled"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <Separator/>
-                        <MenuItem x:Name="ExitProgram" Header="Exit">
+                        <MenuItem x:Name="Exit_Menu" Header="Exit">
                             <MenuItem.Icon>
                                 <iconPacks:MaterialDesign Kind="ExitToApp"/>
                             </MenuItem.Icon>
@@ -61,7 +61,7 @@
                         </MenuItem>
                     </MenuItem>
 
-                    <MenuItem Header="_Help">
+                    <MenuItem x:Name="PopInfoView" Header="_Help">
                         <MenuItem.Icon>
                             <iconPacks:MaterialDesign Kind="Help"/>
                         </MenuItem.Icon>
@@ -75,14 +75,14 @@
 
                 <ToolBarTray>
                     <ToolBar Style="{StaticResource MahApps.Styles.ToolBar}">
-                        <Button ToolTip="Start MQTT Subscriber">
+                        <Button x:Name="StartSubscribe" ToolTip="Start MQTT Subscriber">
                             <iconPacks:MaterialDesign Kind="PlayCircleFilled"/>
                         </Button>
-                        <Button ToolTip="Stop MQTT Subscriber">
+                        <Button x:Name="ToolBar_Stop" ToolTip="Stop MQTT Subscriber">
                             <iconPacks:MaterialDesign Kind="PauseCircleFilled"/>
                         </Button>
                         <Separator/>
-                        <Button ToolTip="Exit">
+                        <Button x:Name="Exit_Toolbar" ToolTip="Exit">
                             <iconPacks:MaterialDesign Kind="ExitToApp"/>
                         </Button>
                     </ToolBar>

@@ -1,11 +1,10 @@
 ﻿using Caliburn.Micro;
 using OxyPlot;
+using OxyPlot.Legends;
+using OxyPlot.Series;
 using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using WpfSmartHomeMonitoringApp.Helpers;
 using WpfSmartHomeMonitoringApp.Models;
@@ -21,7 +20,7 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
         private string endDate;
         private string initEndDate;
         private int totalCount;
-        private PlotModel smartHomeModel;
+        private PlotModel historyModel; //oxyplot 220613, LJT, smartHomeModel -> historyModel
 
         /*
             Divisions
@@ -98,13 +97,13 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
                 NotifyOfPropertyChange(() => TotalCount);
             }
         }
-        public PlotModel SmartHomeModel
+        public PlotModel HistoryModel
         {
-            get => smartHomeModel; 
+            get => historyModel; 
             set
             {
-                smartHomeModel = value;
-                NotifyOfPropertyChange(() => SmartHomeModel);
+                historyModel = value;
+                NotifyOfPropertyChange(() => HistoryModel);
             }
         }
 
@@ -166,28 +165,74 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
 
                     SqlParameter parmDevId = new SqlParameter(@"DevId", SelectedDivision.DivisionVal);
                     cmd.Parameters.Add(parmDevId);
+
                     SqlParameter parmStartDate = new SqlParameter(@"StartDate", StartDate);
                     cmd.Parameters.Add(parmStartDate);
+
                     SqlParameter parmEndDate = new SqlParameter(@"EndDate", EndDate);
                     cmd.Parameters.Add(parmEndDate);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     var i = 0;
-                    while(reader.Read())
+                    // start of 차트처리 작성 220613 추가
+                    // 임시 플롯모델 
+                    PlotModel temp = new PlotModel()
                     {
-                        var temp = reader["Temp"];
-                        //Temp, Humid 
+                        Title = $"{SelectedDivision.DivisionVal} Histories",
+                        Subtitle = "using OxyPlot"
+                    };
+
+                    // 범례추가
+                    var l = new Legend
+                    {
+                        LegendBorder = OxyColors.Black,
+                        LegendBackground = OxyColor.FromAColor(200, OxyColors.White),
+                        LegendPosition = LegendPosition.RightTop,
+                        LegendPlacement = LegendPlacement.Inside
+
+                    };
+
+                    //온도값을 LineChart로 담을 객체
+                    LineSeries seriesTemp = new LineSeries()
+                    {
+                        Color = OxyColor.FromRgb(255, 100, 100),
+                        Title = "Temperature",
+                        MarkerType = MarkerType.Circle,
+                        MarkerSize = 4
+                    };
+
+                    // 습도값을 LineChart로 담을 객체
+                    LineSeries seriesHumid = new LineSeries()
+                    {
+                        Color = OxyColor.FromRgb(150, 150, 255),
+                        Title = "Humidity",
+                        MarkerType = MarkerType.Triangle,
+                        MarkerSize = 3
+                    };
+
+                    while (reader.Read())
+                    {
+                        //var Tmep = reader["Temp"];
+                        // Temp,Humid 차트데이터 생성
+                        seriesTemp.Points.Add(new DataPoint(i, Convert.ToDouble(reader["Temp"])));
+                        seriesHumid.Points.Add(new DataPoint(i, Convert.ToDouble(reader["Humid"])));
+
 
                         i++;
                     }
 
-                    TotalCount = i;
+                    TotalCount = i; // 검색한 데이터 촉 개수
 
+                    temp.Series.Add(seriesTemp);
+                    temp.Series.Add(seriesHumid);
+                    temp.Legends.Add(l);
+                    HistoryModel = temp;
                 }
+
+                // end of 차트처리 작성 220613 추가
                 catch (Exception ex)
                 {
-
                     MessageBox.Show($"Error {ex.Message}");
                     return;
                 }

@@ -131,7 +131,7 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
             DbLog += $"{message}\n";
         }
 
-        private void MQTT_CLIENT_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
+        public void MQTT_CLIENT_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
             var message = Encoding.UTF8.GetString(e.Message);
             UpdateText(message);    //센서데이터 출력
